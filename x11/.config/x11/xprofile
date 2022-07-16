@@ -1,0 +1,8 @@
+#!/bin/sh
+
+xset r rate 300 50 &
+setxkbmap -option caps:swapescape &
+
+picom &
+unclutter &
+xwallpaper --zoom "${XDG_CONFIG_DIR:-$HOME/.config}/wallpaper.jpg" &

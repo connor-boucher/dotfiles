@@ -2,8 +2,8 @@
 
 # User software variables
 export BROWSER="brave"
-export EDITOR="vim"
-export TERMINAL="st"
+export EDITOR="nvim"
+export TERMINAL="alacritty"
 
 # XDG directories
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -12,6 +12,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 
 # ~/ cleanup
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
+export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 export LESSHISTFILE="-"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
@@ -21,5 +22,12 @@ export XMONAD_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/xmonad"
 export XMONAD_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/xmonad"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
+# Software settings
+export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket
+
 # Append ~/.local/bin to PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+
+# Start xorg if it isn't already running
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"

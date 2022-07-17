@@ -1,5 +1,5 @@
 Config { font		 = "xft:Ubuntu Nerd Font:weight=bold:pixelsize=13:antialias=true:hinting=true"
-       , additionalFonts = ["xft:Font Awesome:weight=bold:pixelsize=13:antialias=true:hinting=true"]
+       , additionalFonts = ["xft:Font Awesome 6 Free:weight=bold:pixelsize=13:antialias=true:hinting=true"]
        , bgColor	 = "#282828"
        , fgColor	 = "#ebdbb2"
        , iconRoot 	 = "/home/connor/.config/xmobar/"

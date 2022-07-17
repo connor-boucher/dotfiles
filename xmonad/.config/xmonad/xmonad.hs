@@ -63,7 +63,7 @@ myKeyBindings =
   -- program bindings
   [ ("M-b", spawn "$BROWSER")                               -- launch a web browser
   , ("M-d", spawn "discord")                                -- launch discord
-  , ("M-e", spawn "emacs")                                  -- launch discord
+  , ("M-e", spawn "$TERMINAL -e $EDITOR")                   -- launch vim
   , ("M-f", spawn "$TERMINAL -e lf")                        -- launch a file manager
   , ("M-p", spawn "$TERMINAL -e pulsemixer")                -- launch an audio mixer
   , ("M-t", spawn "$TERMINAL")                              -- launch a terminal

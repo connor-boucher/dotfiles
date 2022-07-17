@@ -5,4 +5,4 @@ setxkbmap -option caps:swapescape &
 
 picom &
 unclutter &
-xwallpaper --zoom "${XDG_CONFIG_DIR:-$HOME/.config}/wallpaper.jpg" &
+xwallpaper --zoom "/home/connor/.config/wallpaper.jpg" &

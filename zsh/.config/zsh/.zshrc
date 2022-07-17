@@ -5,6 +5,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Prompt settings
+export PS1="> %B%n%b > [%~]: "
 setopt autocd
 setopt interactive_comments
 stty stop undef
@@ -28,7 +29,8 @@ alias \
 	ls="ls -hN --color=auto --group-directories-first" \
 	mkdir="mkdir -pv" \
 	mv="mv -iv" \
-	rm="rm -vI"
+	rm="rm -vI" \
+	sudo="nocorrect sudo -E "
 
 # User program aliases
 alias \

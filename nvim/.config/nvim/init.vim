@@ -1,5 +1,6 @@
 " Editor settings
 set encoding=utf-8
+set expandtab
 set laststatus=0
 set nobackup
 set noruler
@@ -8,6 +9,10 @@ set noshowmode
 set noswapfile
 set nowritebackup
 set number relativenumber
+set shiftwidth=4
+set smartindent
+set softtabstop=4
+set tabstop=4
 set title
 set wildmode=longest,list,full
 

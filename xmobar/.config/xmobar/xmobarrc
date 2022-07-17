@@ -9,7 +9,7 @@ Config { font		 = "xft:Ubuntu Nerd Font:weight=bold:pixelsize=13:antialias=true:
 			   , Run Memory ["-t", " <fn=1>\xf233</fn>  MEM: <used>M (<usedratio>%)"] 20
 			   , Run DiskU [("/", " <fn=1>\xf0c7</fn>  HDD: <free> free")] [] 60
 		    	   , Run Com "echo" ["\xf1b2"] "package" 0
-		    	   , Run Com "getupdates" [] "updates" 36000
+		    	   , Run Com "get-update-count" [] "updates" 36000
 			   , Run UnsafeStdinReader
 			   ]
        , sepChar 	 = "%"

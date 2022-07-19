@@ -37,35 +37,54 @@ myLayouts = toggleLayouts threeCol tile
     threeCol  = ThreeColMid  1        (5/100)  (55/100)
     tile      = Tall         1        (5/100)  (50/100)
 
+-- send applications to default workspaces
+myManageHook = composeAll
+    [ className =? "Brave-browser" --> doShift "www"
+    , className =? "discord" --> doShift "chat"
+    , title =? "spotify-tui" --> doShift "mus"
+    ]
+
+-- handle event hook
+myHandleEventHook = mempty
+
+-- xmobar output loghook
+myLogHook xmproc = dynamicLogWithPP xmobarPP
+    { ppOutput          = hPutStrLn xmproc
+    , ppCurrent         = xmobarColor "#8ec07c" "" . wrap "[" "]"
+    , ppVisible         = xmobarColor "#928374" ""
+    , ppHidden          = xmobarColor "#d5c4a1" "" . wrap " " " "
+    , ppHiddenNoWindows = xmobarColor "#928374" "" . wrap " " " "
+    , ppUrgent          = xmobarColor "#fb4934" ""
+    , ppLayout          = xmobarColor "#d79921" "" . wrap " " " "
+    , ppTitle           = xmobarColor "#83a598" "" . shorten 60 . wrap " " ""
+    , ppSep             = " <fc=#7c6f64>|</fc> "
+    }
 
 -- autolaunch applications
-myStartupHook :: X ()
 myStartupHook = do
   return ()
 
 
 -- prompt configuration
-myPrompt :: XPConfig
 myPrompt = def
-           {
-             font              = "xft:Ubuntu Nerd Font:pixelsize=13"
-           , bgColor           = "#282828"
-           , fgColor           = "#ebdbb2"
-           , promptBorderWidth = 0
-           , position          = Top
-           }
+    { font              = "xft:Ubuntu Nerd Font:pixelsize=13"
+    , bgColor           = "#282828"
+    , fgColor           = "#ebdbb2"
+    , promptBorderWidth = 0
+    , position          = Top
+    }
 
 
 -- custom key bindings
-myKeyBindings :: [(String, X ())]
 myKeyBindings =
 
   -- program bindings
   [ ("M-b", spawn "$BROWSER")                               -- launch a web browser
   , ("M-t", spawn "$TERMINAL")                              -- launch a terminal
-  , ("M-e", spawn "$TERMINAL -e $EDITOR")                   -- launch vim
+  , ("M-e", spawn "$TERMINAL -e $EDITOR")                   -- launch a text editor
   , ("M-f", spawn "$TERMINAL -e lf")                        -- launch a file manager
-  , ("M-p", spawn "$TERMINAL -e pulsemixer")                -- launch an audio mixer
+  , ("M-p", spawn "$TERMINAL -t pulsemixer -e pulsemixer")  -- launch an audio mixer
+  , ("M-s", spawn "$TERMINAL -t spotify-tui -e spt")        -- launch spotify
   , ("M-d", spawn "powercord")                              -- launch discord
 
   -- xmonad bindings
@@ -94,7 +113,6 @@ myKeyBindings =
 
 
 -- run xmonad with the configured settings
-main :: IO ()
 main = do
   xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobarrc"
   xmonad $ docks desktopConfig
@@ -110,19 +128,9 @@ main = do
 
     -- hooks, layouts
     , layoutHook         = desktopLayoutModifiers $ avoidStruts $ mySpacing $ myLayouts
-    , manageHook         = composeAll[]
-    , handleEventHook    = mempty
-    , logHook            = dynamicLogWithPP xmobarPP
-                           { ppOutput          = hPutStrLn xmproc
-                           , ppCurrent         = xmobarColor "#8ec07c" "" . wrap "[" "]"
-                           , ppVisible         = xmobarColor "#928374" ""
-                           , ppHidden          = xmobarColor "#d5c4a1" "" . wrap " " " "
-                           , ppHiddenNoWindows = xmobarColor "#928374" "" . wrap " " " "
-                           , ppUrgent          = xmobarColor "#fb4934" ""
-                           , ppLayout          = xmobarColor "#d79921" "" . wrap " " " "
-                           , ppTitle           = xmobarColor "#83a598" "" . shorten 60 . wrap " " ""
-                           , ppSep             = " <fc=#7c6f64>|</fc> "
-                           }
+    , manageHook         = myManageHook
+    , handleEventHook    = myHandleEventHook
+    , logHook            = myLogHook xmproc
     , startupHook        = myStartupHook
     }
 

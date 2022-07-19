@@ -1,8 +1,15 @@
 #!/bin/sh
 
+# Set input settings
 xset r rate 300 50 &
 setxkbmap -option caps:swapescape &
 
+# Start user software
 picom &
 unclutter &
 xwallpaper --zoom "${XDG_CONFIG_HOME:-$HOME/.config}/wallpaper.jpg" &
+
+# Start pipewire for audio
+/usr/bin/pipewire &
+/usr/bin/pipewire-pulse &
+/usr/bin/wireplumber &

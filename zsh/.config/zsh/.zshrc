@@ -37,6 +37,7 @@ alias \
 	g="git" \
 	e="$EDITOR" \
 	p="pacman" \
+    y="yay" \
 	z="zathura"
 
 # Use neovim if installed
